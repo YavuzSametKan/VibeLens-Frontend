@@ -13,6 +13,8 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="camera" />
+        <Stack.Screen name="analyzing" />
+        <Stack.Screen name="results" />
       </Stack>
       <StatusBar style="light" />
     </ThemeProvider>

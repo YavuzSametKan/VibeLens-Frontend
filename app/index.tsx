@@ -3,7 +3,8 @@ import { MoodButton } from '@/src/components/MoodButton';
 import { Category, useAppStore } from '@/src/store/useAppStore';
 import { router } from 'expo-router';
 import { Book, Film, Music, Tv } from 'lucide-react-native';
-import { Alert, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface CategoryConfig {
     id: Category;
@@ -14,6 +15,7 @@ interface CategoryConfig {
 
 export default function HomeScreen() {
     const { selectedCategory, setSelectedCategory } = useAppStore();
+    const insets = useSafeAreaInsets();
 
     const handleScanPress = () => {
         if (!selectedCategory) {
@@ -58,7 +60,7 @@ export default function HomeScreen() {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={[styles.container, { paddingTop: insets.top }]}>
             <View style={styles.content}>
                 <View style={styles.header}>
                     <Text style={styles.title}>VibeLens</Text>
@@ -88,7 +90,7 @@ export default function HomeScreen() {
                     <MoodButton onPress={handleScanPress} disabled={!selectedCategory} />
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 

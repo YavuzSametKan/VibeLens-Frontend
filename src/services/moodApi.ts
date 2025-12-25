@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { MoodResponse } from '../types/api';
 
-const API_BASE_URL = 'http://localhost:8000';
+// Get the development server IP automatically
+// Bilgisayarının IP adresini buraya yaz (örn: 172.20.10.x)
+// 'ipconfig getifaddr en0' komutu ile bulabilirsin.
+const API_BASE_URL = 'http://172.20.10.2:8000'; // IP adresini terminalden çıkanla değiştir
+
+console.log('API Base URL:', API_BASE_URL); // Debug log
 
 export interface AnalyzeMoodRequest {
     image: string; // URI of the image
@@ -20,14 +25,26 @@ export const analyzeMood = async (
         const filename = imageUri.split('/').pop() || 'photo.jpg';
 
         // Create file object for upload
+        // iOS expects 'file://' prefix, Android might not.
+        // But for upload, we need to ensure it's a valid object.
         const file = {
-            uri: imageUri,
+            uri: imageUri, // Keep file:// prefix for iOS
             type: 'image/jpeg',
-            name: filename,
+            name: 'photo.jpg',
         } as any;
 
-        formData.append('image', file);
-        formData.append('category', category);
+        formData.append('file', file);
+
+        // Map frontend categories (plural) to API categories (singular)
+        const categoryMapping: Record<string, string> = {
+            'Movies': 'Movie',
+            'Series': 'Series',
+            'Music': 'Music',
+            'Books': 'Book',
+        };
+
+        const apiCategory = categoryMapping[category] || category;
+        formData.append('category', apiCategory);
 
         const response = await axios.post<MoodResponse>(
             `${API_BASE_URL}/analyze`,
@@ -36,7 +53,7 @@ export const analyzeMood = async (
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
-                timeout: 30000, // 30 second timeout
+                timeout: 60000, // 60 second timeout (backend takes 15-20s)
             }
         );
 

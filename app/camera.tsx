@@ -1,3 +1,4 @@
+import { useAppStore } from '@/src/store/useAppStore';
 import { CameraType, CameraView, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, Camera, Check, RotateCcw } from 'lucide-react-native';
@@ -6,9 +7,10 @@ import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-na
 
 export default function CameraScreen() {
     const router = useRouter();
+    const { setCapturedPhoto } = useAppStore();
     const [facing, setFacing] = useState<CameraType>('front');
     const [permission, requestPermission] = useCameraPermissions();
-    const [capturedPhoto, setCapturedPhoto] = useState<{ uri: string; facing: CameraType } | null>(null);
+    const [capturedPhoto, setLocalCapturedPhoto] = useState<{ uri: string; facing: CameraType } | null>(null);
     const cameraRef = useRef<CameraView>(null);
 
     useEffect(() => {
@@ -25,7 +27,7 @@ export default function CameraScreen() {
                     base64: false,
                 });
                 if (photo) {
-                    setCapturedPhoto({ uri: photo.uri, facing });
+                    setLocalCapturedPhoto({ uri: photo.uri, facing });
                 }
             } catch (error) {
                 console.error('Error taking picture:', error);
@@ -35,7 +37,7 @@ export default function CameraScreen() {
     };
 
     const handleRetake = () => {
-        setCapturedPhoto(null);
+        setLocalCapturedPhoto(null);
     };
 
     const handleConfirm = () => {
