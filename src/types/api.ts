@@ -1,6 +1,8 @@
 export interface ExternalLinks {
     spotify?: string;
     youtube?: string;
+    youtube_music?: string;
+    apple?: string;
 }
 
 export interface Recommendation {

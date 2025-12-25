@@ -1,8 +1,9 @@
 import { fetchPoster } from '@/src/services/imageService';
 import { useAppStore } from '@/src/store/useAppStore';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { ArrowLeft, BarChart2, Book, Calendar, ExternalLink, Film, Music, Play, Star, TrendingUp, Tv, User } from 'lucide-react-native';
+import { ArrowLeft, BarChart2, Book, Calendar, ExternalLink, Film, Music, Star, TrendingUp, Tv, User } from 'lucide-react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Dimensions, Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -239,11 +240,9 @@ export default function ResultsScreen() {
 
                                         <View style={styles.reasonBox}>
                                             <Text style={styles.reasonLabel}>Neden?</Text>
-                                            <ScrollView style={{ maxHeight: 120 }} nestedScrollEnabled showsVerticalScrollIndicator={true}>
-                                                <Text style={styles.sliderReason}>
-                                                    {rec.reason}
-                                                </Text>
-                                            </ScrollView>
+                                            <Text style={styles.sliderReason}>
+                                                {rec.reason}
+                                            </Text>
                                         </View>
 
                                         {/* Actions Section */}
@@ -252,35 +251,42 @@ export default function ResultsScreen() {
                                                 <View style={styles.musicButtonsRow}>
                                                     {/* Spotify */}
                                                     <TouchableOpacity
-                                                        style={[styles.platformBtn, { backgroundColor: '#1DB954' }]}
+                                                        style={[styles.platformBtnIconOnly, { backgroundColor: '#1DB954' }]}
                                                         onPress={() => rec.external_links?.spotify
                                                             ? Linking.openURL(rec.external_links.spotify)
                                                             : openMusicLink('spotify', rec.title)}
                                                     >
-                                                        <Music size={16} color="#fff" />
-                                                        <Text style={styles.platformBtnText}>Spotify</Text>
+                                                        <FontAwesome5 name="spotify" size={22} color="#fff" />
                                                     </TouchableOpacity>
 
                                                     {/* YouTube Music */}
                                                     <TouchableOpacity
-                                                        style={[styles.platformBtn, { backgroundColor: '#FF0000' }]}
-                                                        onPress={() => rec.external_links?.youtube
-                                                            ? Linking.openURL(rec.external_links.youtube)
+                                                        style={[styles.platformBtnIconOnly, { backgroundColor: '#FF0000' }]}
+                                                        onPress={() => rec.external_links?.youtube_music
+                                                            ? Linking.openURL(rec.external_links.youtube_music)
                                                             : openMusicLink('youtube', rec.title)}
                                                     >
-                                                        <Play size={16} color="#fff" fill="#fff" />
-                                                        <Text style={styles.platformBtnText}>YT Music</Text>
+                                                        <FontAwesome5 name="play" size={20} color="#fff" solid />
+                                                    </TouchableOpacity>
+
+                                                    {/* YouTube */}
+                                                    <TouchableOpacity
+                                                        style={[styles.platformBtnIconOnly, { backgroundColor: '#FF0000' }]}
+                                                        onPress={() => rec.external_links?.youtube
+                                                            ? Linking.openURL(rec.external_links.youtube)
+                                                            : Linking.openURL(`https://www.youtube.com/results?search_query=${encodeURIComponent(rec.title)}`)}
+                                                    >
+                                                        <FontAwesome5 name="youtube" size={22} color="#fff" />
                                                     </TouchableOpacity>
 
                                                     {/* Apple Music */}
                                                     <TouchableOpacity
-                                                        style={[styles.platformBtn, { backgroundColor: '#FA243C' }]}
+                                                        style={[styles.platformBtnIconOnly, { backgroundColor: '#FA243C' }]}
                                                         onPress={() => rec.external_links?.apple
                                                             ? Linking.openURL(rec.external_links.apple)
                                                             : openMusicLink('apple', rec.title)}
                                                     >
-                                                        <Music size={16} color="#fff" />
-                                                        <Text style={styles.platformBtnText}>Apple</Text>
+                                                        <FontAwesome5 name="apple" size={22} color="#fff" />
                                                     </TouchableOpacity>
                                                 </View>
                                             ) : (
@@ -544,7 +550,7 @@ const styles = StyleSheet.create({
     sliderCardContent: {
         flex: 1,
         padding: 20,
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
     },
     sliderTitle: {
         fontSize: 20,
@@ -564,7 +570,6 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 12,
         marginBottom: 12,
-        flex: 1,
     },
     reasonLabel: {
         fontSize: 10,
