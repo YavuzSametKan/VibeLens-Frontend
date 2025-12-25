@@ -1,12 +1,3 @@
-Harika! Elindeki ekran görüntüleri ve proje detaylarına dayanarak, GitHub veya proje dokümantasyonu için profesyonel, modern ve açıklayıcı bir **README.md** dosyası hazırladım.
-
-Bu dosya, projenin **Frontend (Mobil)** tarafını temsil eder. Ekran görüntülerini projenin içine `docs/screenshots` klasörüne koyduğunu varsayarak yolları ayarladım.
-
-Aşağıdaki kodu kopyalayıp projenin kök dizinine `README.md` olarak kaydedebilirsin.
-
----
-
-```markdown
 # 📸 VibeLens Mobile Client
 
 ![VibeLens Banner](https://via.placeholder.com/1200x300/000000/06b6d4?text=VibeLens+AI+Mood+Scanner)
