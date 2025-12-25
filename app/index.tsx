@@ -14,7 +14,7 @@ interface CategoryConfig {
 }
 
 export default function HomeScreen() {
-    const { selectedCategory, setSelectedCategory } = useAppStore();
+    const { selectedCategory, setSelectedCategory, reusePhoto, capturedPhoto, setReusePhoto } = useAppStore();
     const insets = useSafeAreaInsets();
 
     const handleScanPress = () => {
@@ -22,7 +22,14 @@ export default function HomeScreen() {
             Alert.alert("Seçim Gerekli", "Lütfen önce bir kategori seçin.");
             return;
         }
-        router.push('/camera');
+
+        // If reusing photo and we have a captured photo, go directly to analyzing
+        if (reusePhoto && capturedPhoto) {
+            setReusePhoto(false); // Reset the flag
+            router.push('/analyzing');
+        } else {
+            router.push('/camera');
+        }
     };
 
     const categories: CategoryConfig[] = [

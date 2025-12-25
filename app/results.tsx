@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, BarChart2, Book, Calendar, ExternalLink, Film, Music, Star, TrendingUp, Tv, User } from 'lucide-react-native';
 import { useEffect, useRef, useState } from 'react';
-import { Animated, Dimensions, Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Animated, Dimensions, Image, Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window');
@@ -18,7 +18,7 @@ const POSTER_HEIGHT = CARD_WIDTH * 1.5; // True 2:3 ratio
 
 export default function ResultsScreen() {
     const router = useRouter();
-    const { moodData, reset, selectedCategory } = useAppStore();
+    const { moodData, reset, resetForNewScan, setReusePhoto, selectedCategory } = useAppStore();
     const insets = useSafeAreaInsets();
     const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -49,8 +49,28 @@ export default function ResultsScreen() {
     }
 
     const handleBackHome = () => {
-        reset();
-        router.replace('/');
+        Alert.alert(
+            "Yeni Tarama",
+            "Aynı fotoğraf ile devam etmek ister misin?",
+            [
+                {
+                    text: "Hayır",
+                    style: "cancel",
+                    onPress: () => {
+                        reset();
+                        router.replace('/');
+                    }
+                },
+                {
+                    text: "Evet",
+                    onPress: () => {
+                        setReusePhoto(true);
+                        resetForNewScan();
+                        router.replace('/');
+                    }
+                }
+            ]
+        );
     };
 
     const emotionColors: Record<string, string> = {

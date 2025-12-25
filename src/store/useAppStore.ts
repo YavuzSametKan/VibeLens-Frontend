@@ -8,11 +8,14 @@ interface AppState {
     capturedPhoto: string | null;
     moodData: MoodResponse | null;
     isLoading: boolean;
+    reusePhoto: boolean;
     setSelectedCategory: (category: Category | null) => void;
     setCapturedPhoto: (uri: string | null) => void;
     setMoodData: (data: MoodResponse | null) => void;
     setIsLoading: (loading: boolean) => void;
+    setReusePhoto: (reuse: boolean) => void;
     reset: () => void;
+    resetForNewScan: () => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -20,9 +23,12 @@ export const useAppStore = create<AppState>((set) => ({
     capturedPhoto: null,
     moodData: null,
     isLoading: false,
+    reusePhoto: false,
     setSelectedCategory: (category) => set({ selectedCategory: category }),
     setCapturedPhoto: (uri) => set({ capturedPhoto: uri }),
     setMoodData: (data) => set({ moodData: data }),
     setIsLoading: (loading) => set({ isLoading: loading }),
-    reset: () => set({ selectedCategory: null, capturedPhoto: null, moodData: null, isLoading: false }),
+    setReusePhoto: (reuse) => set({ reusePhoto: reuse }),
+    reset: () => set({ selectedCategory: null, capturedPhoto: null, moodData: null, isLoading: false, reusePhoto: false }),
+    resetForNewScan: () => set({ selectedCategory: null, moodData: null, isLoading: false }),
 }));
