@@ -1,13 +1,24 @@
 # VibeLens Mobile Client
-
-![VibeLens Banner](https://via.placeholder.com/1200x300/000000/06b6d4?text=VibeLens+AI+Mood+Scanner)
-
-> **Ruh haline uygun içerikler keşfet.** > Yapay zeka destekli yüz analizi ile anlık duygu durumunuzu tespit eden ve size en uygun Film, Dizi, Müzik veya Kitap önerileri sunan React Native uygulaması.
+Yapay zeka destekli yüz analizi ile anlık duygu durumunuzu tespit eden ve size en uygun Film, Dizi, Müzik veya Kitap önerileri sunan React Native uygulaması.
 
 [![Expo](https://img.shields.io/badge/Expo-SDK_50+-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
 [![React Native](https://img.shields.io/badge/React_Native-0.73-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactnative.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![NativeWind](https://img.shields.io/badge/Tailwind_CSS-NativeWind-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://www.nativewind.dev/)
+
+---
+
+## Ekran Görüntüleri
+
+| **Ana Ekran** | **Kamera & Tarama** | **Önizleme & Onay** |
+|:---:|:---:|:---:|
+| <img src="./docs/screenshots/home.PNG" width="250" alt="Home Screen" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" alt="Camera Scan" /> | <img src="./docs/screenshots/preview.PNG" width="250" alt="Preview Screen" /> |
+| *Kategori Seçimi* | *Yüz Tespiti* | *Fotoğraf Onayı* |
+
+| **Yükleniyor** | **Sonuçlar (Analiz)** | **Sonuçlar (Öneri)** |
+|:---:|:---:|:---:|
+| <img src="./docs/screenshots/loading.PNG" width="250" alt="Loading State" /> | <img src="./docs/screenshots/results_analysis.PNG" width="250" alt="Analysis Result" /> | <img src="./docs/screenshots/results_recommendation.PNG" width="250" alt="Recommendation" /> |
+| *AI Analiz Süreci* | *Duygu Raporu* | *İçerik Önerisi* |
 
 ---
 
@@ -30,20 +41,6 @@ Uygulama, **Cyberpunk/Dark Mode** estetiği ile tasarlanmış olup, akıcı anim
     * Kitaplar
 * **Modern UI/UX:** NativeWind ile oluşturulmuş, Neon vurgulu şık karanlık mod tasarımı.
 * **⚡ Performans:** Expo Router ile hızlı sayfa geçişleri ve Zustand ile optimize edilmiş durum yönetimi.
-
----
-
-## Ekran Görüntüleri
-
-| **Ana Ekran** | **Kamera & Tarama** | **Önizleme & Onay** |
-|:---:|:---:|:---:|
-| <img src="./docs/screenshots/home.PNG" width="250" alt="Home Screen" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" alt="Camera Scan" /> | <img src="./docs/screenshots/preview.PNG" width="250" alt="Preview Screen" /> |
-| *Kategori Seçimi* | *Yüz Tespiti* | *Fotoğraf Onayı* |
-
-| **Yükleniyor** | **Sonuçlar (Analiz)** | **Sonuçlar (Öneri)** |
-|:---:|:---:|:---:|
-| <img src="./docs/screenshots/loading.PNG" width="250" alt="Loading State" /> | <img src="./docs/screenshots/results_analysis.PNG" width="250" alt="Analysis Result" /> | <img src="./docs/screenshots/results_recommendation.PNG" width="250" alt="Recommendation" /> |
-| *AI Analiz Süreci* | *Duygu Raporu* | *İçerik Önerisi* |
 
 ---
 
