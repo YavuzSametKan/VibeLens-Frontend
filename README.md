@@ -1,4 +1,4 @@
-# 📸 VibeLens Mobile Client
+# VibeLens Mobile Client
 
 ![VibeLens Banner](https://via.placeholder.com/1200x300/000000/06b6d4?text=VibeLens+AI+Mood+Scanner)
 
@@ -11,7 +11,7 @@
 
 ---
 
-## 📱 Proje Hakkında
+## Proje Hakkında
 
 **VibeLens**, kullanıcıların selfie çekerek o anki duygusal durumlarını (Mutluluk, Üzgünlük, Öfke, Küçümseme vb.) analiz etmelerini sağlar. Arka planda çalışan güçlü bir Python API (DeepFace & Gemini AI) ile iletişim kurarak, tespit edilen duyguya özel kürate edilmiş içerik önerileri sunar.
 
@@ -19,25 +19,25 @@ Uygulama, **Cyberpunk/Dark Mode** estetiği ile tasarlanmış olup, akıcı anim
 
 ---
 
-## ✨ Özellikler
+## Özellikler
 
-* **🎭 AI Destekli Duygu Analizi:** Yüz ifadelerinden baskın ve ikincil duyguları (örn: *Eleştirel Mesafe ve Serinkanlı Küçümseme*) tespit eder.
-* **📷 Gelişmiş Kamera Arayüzü:** Yüz çerçeveleme kılavuzları ile entegre kamera deneyimi.
-* **🎯 Dinamik Öneriler:**
-    * 🎬 Filmler
-    * 📺 Diziler
-    * 🎵 Müzik
-    * 📚 Kitaplar
-* **💅 Modern UI/UX:** NativeWind ile oluşturulmuş, Neon vurgulu şık karanlık mod tasarımı.
+* **AI Destekli Duygu Analizi:** Yüz ifadelerinden baskın ve ikincil duyguları (örn: *Eleştirel Mesafe ve Serinkanlı Küçümseme*) tespit eder.
+* **Gelişmiş Kamera Arayüzü:** Yüz çerçeveleme kılavuzları ile entegre kamera deneyimi.
+* **Dinamik Öneriler:**
+    * Filmler
+    * Diziler
+    * Müzik
+    * Kitaplar
+* **Modern UI/UX:** NativeWind ile oluşturulmuş, Neon vurgulu şık karanlık mod tasarımı.
 * **⚡ Performans:** Expo Router ile hızlı sayfa geçişleri ve Zustand ile optimize edilmiş durum yönetimi.
 
 ---
 
-## 🖼️ Ekran Görüntüleri
+## Ekran Görüntüleri
 
 | **Ana Ekran** | **Kamera & Tarama** | **Önizleme & Onay** |
 |:---:|:---:|:---:|
-| <img src="./docs/screenshots/home.png" width="250" alt="Home Screen" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" alt="Camera Scan" /> | <img src="./docs/screenshots/preview.PNG" width="250" alt="Preview Screen" /> |
+| <img src="./docs/screenshots/home.PNG" width="250" alt="Home Screen" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" alt="Camera Scan" /> | <img src="./docs/screenshots/preview.PNG" width="250" alt="Preview Screen" /> |
 | *Kategori Seçimi* | *Yüz Tespiti* | *Fotoğraf Onayı* |
 
 | **Yükleniyor** | **Sonuçlar (Analiz)** | **Sonuçlar (Öneri)** |
@@ -47,7 +47,7 @@ Uygulama, **Cyberpunk/Dark Mode** estetiği ile tasarlanmış olup, akıcı anim
 
 ---
 
-## 🛠️ Teknoloji Yığını
+## Teknoloji Yığını
 
 * **Framework:** React Native (via Expo)
 * **Dil:** TypeScript
@@ -60,7 +60,7 @@ Uygulama, **Cyberpunk/Dark Mode** estetiği ile tasarlanmış olup, akıcı anim
 
 ---
 
-## 🚀 Kurulum ve Çalıştırma
+## Kurulum ve Çalıştırma
 
 Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin.
 
@@ -107,7 +107,7 @@ QR kodu telefonunuzdaki **Expo Go** uygulaması ile taratın veya `i` tuşuna ba
 
 ---
 
-## 📂 Proje Yapısı
+## Proje Yapısı
 
 ```
 VibeLensMobile/
@@ -133,7 +133,7 @@ VibeLensMobile/
 
 ---
 
-## 🤝 Katkıda Bulunma
+## Katkıda Bulunma
 
 1. Bu repoyu Forklayın.
 2. Yeni bir feature branch oluşturun (`git checkout -b feature/AmazingFeature`).
@@ -143,6 +143,6 @@ VibeLensMobile/
 
 ---
 
-## 📄 Lisans
+## Lisans
 
 Bu proje [MIT](https://www.google.com/search?q=LICENSE) lisansı altında lisanslanmıştır.
