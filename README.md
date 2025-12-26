@@ -6,19 +6,7 @@ Yapay zeka destekli yüz analizi ile anlık duygu durumunuzu tespit eden ve size
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![NativeWind](https://img.shields.io/badge/Tailwind_CSS-NativeWind-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://www.nativewind.dev/)
 
----
-
-## Ekran Görüntüleri
-
 <img src="./docs/screenshots/general.jpeg" alt="General" />
-
-| **Ana Ekran** | **Kamera & Tarama** | **Önizleme & Onay** |
-|:---:|:---:|:---:|
-| <img src="./docs/screenshots/home.PNG" width="250" alt="Home Screen" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" alt="Camera Scan" /> | <img src="./docs/screenshots/preview.PNG" width="250" alt="Preview Screen" /> |
-
-| **Yükleniyor** | **Sonuçlar (Analiz)** | **Sonuçlar (Öneri)** |
-|:---:|:---:|:---:|
-| <img src="./docs/screenshots/loading.PNG" width="250" alt="Loading State" /> | <img src="./docs/screenshots/results_analysis.PNG" width="250" alt="Analysis Result" /> | <img src="./docs/screenshots/results_recommendation.PNG" width="250" alt="Recommendation" /> |
 
 ---
 
