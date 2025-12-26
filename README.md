@@ -9,15 +9,11 @@ Yapay zeka destekli yüz analizi ile anlık duygu durumunu tespit eden ve kullan
 
 ![General App Preview](./docs/screenshots/general.jpeg)
 
----
-
 ## Proje Hakkında
 
 VibeLens, kullanıcıların selfie çekerek o anki duygusal durumlarını analiz etmelerini sağlayan bir mobil istemcidir. Uygulama, arka planda çalışan Python tabanlı bir API ile iletişim kurarak yüz ifadelerinden baskın ve ikincil duyguları tespit eder. Analiz sonucuna göre kürate edilmiş içerik önerileri sunar.
 
 Arayüz tasarımı karanlık mod (dark mode) esas alınarak geliştirilmiş olup, NativeWind kullanılarak şekillendirilmiştir.
-
----
 
 ## Özellikler
 
@@ -26,8 +22,6 @@ Arayüz tasarımı karanlık mod (dark mode) esas alınarak geliştirilmiş olup
 * **İçerik Önerileri:** Tespit edilen ruh haline uygun film, dizi, müzik ve kitap tavsiyeleri.
 * **Kullanıcı Arayüzü:** Neon vurgulara sahip modern ve minimalist tasarım.
 * **Performans:** Expo Router ile dosya tabanlı yönlendirme ve Zustand ile durum yönetimi.
-
----
 
 ## Ekran Görüntüleri
 
@@ -39,8 +33,6 @@ Arayüz tasarımı karanlık mod (dark mode) esas alınarak geliştirilmiş olup
 |:---:|:---:|:---:|
 | <img src="./docs/screenshots/loading.PNG" width="250" /> | <img src="./docs/screenshots/results_analysis.PNG" width="250" /> | <img src="./docs/screenshots/results_recommendation.PNG" width="250" /> |
 
----
-
 ## Teknoloji Yığını
 
 * **Framework:** React Native (Expo SDK 50+)
@@ -49,8 +41,6 @@ Arayüz tasarımı karanlık mod (dark mode) esas alınarak geliştirilmiş olup
 * **Navigasyon:** Expo Router
 * **Durum Yönetimi:** Zustand
 * **Ağ İstekleri:** Axios
-
----
 
 ## Kurulum
 
@@ -94,9 +84,6 @@ npx expo start
 
 ```
 
-
----
-
 ## Proje Yapısı
 
 Proje, Expo Router yapısına uygun olarak düzenlenmiş olup, kaynak kodları `src` dizini altında modüler hale getirilmiştir.
@@ -123,8 +110,6 @@ VibeLens-Frontend/
 └── docs/                     # Dokümantasyon materyalleri
 
 ```
-
----
 
 ## Lisans
 
