@@ -10,6 +10,8 @@ Yapay zeka destekli yüz analizi ile anlık duygu durumunuzu tespit eden ve size
 
 ## Ekran Görüntüleri
 
+<img src="./docs/screenshots/general.jpeg" alt="General" />
+
 | **Ana Ekran** | **Kamera & Tarama** | **Önizleme & Onay** |
 |:---:|:---:|:---:|
 | <img src="./docs/screenshots/home.PNG" width="250" alt="Home Screen" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" alt="Camera Scan" /> | <img src="./docs/screenshots/preview.PNG" width="250" alt="Preview Screen" /> |

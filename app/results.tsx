@@ -1,3 +1,4 @@
+import { TypewriterText } from '@/src/components/TypewriterText';
 import { fetchPoster } from '@/src/services/imageService';
 import { useAppStore } from '@/src/store/useAppStore';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -24,12 +25,23 @@ export default function ResultsScreen() {
 
     // State to store fetched poster URLs
     const [posters, setPosters] = useState<Record<number, string>>({});
+    // State to track which card is flipped
+    const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
+    // Animation values for flip effect
+    const flipAnimations = useRef<Record<number, Animated.Value>>({}).current;
 
     useEffect(() => {
         if (!moodData) {
             router.replace('/');
             return;
         }
+
+        // Initialize flip animations for each card
+        moodData.recommendations.forEach((_, index) => {
+            if (!flipAnimations[index]) {
+                flipAnimations[index] = new Animated.Value(0);
+            }
+        });
 
         const loadPosters = async () => {
             moodData.recommendations.forEach(async (rec, index) => {
@@ -100,6 +112,26 @@ export default function ResultsScreen() {
         }
     };
 
+    const getAgeRange = (age: number): string => {
+        const minAge = Math.max(0, age - 5);
+        const maxAge = age + 5;
+        return `${minAge}-${maxAge} Yaş`;
+    };
+
+    const handleFlip = (index: number) => {
+        const isFlipped = flippedCards[index];
+        const toValue = isFlipped ? 0 : 180;
+
+        Animated.spring(flipAnimations[index], {
+            toValue,
+            friction: 8,
+            tension: 10,
+            useNativeDriver: true,
+        }).start();
+
+        setFlippedCards(prev => ({ ...prev, [index]: !isFlipped }));
+    };
+
     const openMusicLink = (platform: 'spotify' | 'apple' | 'youtube', title: string) => {
         // Construct search URLs if direct link is missing
         const query = encodeURIComponent(title);
@@ -142,7 +174,7 @@ export default function ResultsScreen() {
                         </View>
                         <View style={styles.tag}>
                             <Calendar size={14} color="#9ca3af" />
-                            <Text style={styles.tagText}>{moodData.detected_age} Yaş</Text>
+                            <Text style={styles.tagText}>{getAgeRange(moodData.detected_age)}</Text>
                         </View>
                     </View>
                 </View>
@@ -224,48 +256,83 @@ export default function ResultsScreen() {
 
                             const posterUrl = rec.poster_url || posters[index];
 
+                            // Flip animation interpolations
+                            const frontRotateY = flipAnimations[index]?.interpolate({
+                                inputRange: [0, 180],
+                                outputRange: ['0deg', '180deg'],
+                            }) || '0deg';
+
+                            const backRotateY = flipAnimations[index]?.interpolate({
+                                inputRange: [0, 180],
+                                outputRange: ['180deg', '360deg'],
+                            }) || '180deg';
+
+                            const frontOpacity = flipAnimations[index]?.interpolate({
+                                inputRange: [0, 89, 90, 180],
+                                outputRange: [1, 1, 0, 0],
+                            }) || 1;
+
+                            const backOpacity = flipAnimations[index]?.interpolate({
+                                inputRange: [0, 89, 90, 180],
+                                outputRange: [0, 0, 1, 1],
+                            }) || 0;
+
                             return (
                                 <Animated.View
                                     key={index}
                                     style={[
                                         styles.sliderCard,
-                                        { transform: [{ scale }] }
+                                        {
+                                            transform: [{ scale }],
+                                            height: selectedCategory === 'Music' ? CARD_WIDTH + 180 : 520
+                                        }
                                     ]}
                                 >
-                                    {/* Dynamic Poster Container: Square for Music, Vertical for others */}
-                                    <View style={[
-                                        styles.cardImageContainer,
-                                        selectedCategory === 'Music' && { height: CARD_WIDTH }
-                                    ]}>
-                                        {posterUrl ? (
-                                            <Image source={{ uri: posterUrl }} style={styles.sliderImage} />
-                                        ) : (
-                                            <View style={[styles.posterPlaceholder, { backgroundColor: '#1a1a1a' }]}>
-                                                {getCategoryIcon()}
+                                    {/* Front of Card - Tappable */}
+                                    <Animated.View
+                                        style={[
+                                            styles.cardFace,
+                                            styles.cardFront,
+                                            {
+                                                opacity: frontOpacity,
+                                                transform: [{ rotateY: frontRotateY }],
+                                            },
+                                        ]}
+                                    >
+                                        <TouchableOpacity
+                                            activeOpacity={0.9}
+                                            onPress={() => handleFlip(index)}
+                                            style={styles.cardTouchable}
+                                        >
+                                            {/* Dynamic Poster Container: Square for Music, Vertical for others */}
+                                            <View style={[
+                                                styles.cardImageContainer,
+                                                selectedCategory === 'Music' && { height: CARD_WIDTH }
+                                            ]}>
+                                                {posterUrl ? (
+                                                    <Image source={{ uri: posterUrl }} style={styles.sliderImage} />
+                                                ) : (
+                                                    <View style={[styles.posterPlaceholder, { backgroundColor: '#1a1a1a' }]}>
+                                                        {getCategoryIcon()}
+                                                    </View>
+                                                )}
+                                                <LinearGradient
+                                                    colors={['transparent', 'rgba(0,0,0,0.9)']}
+                                                    style={styles.imageOverlay}
+                                                />
+                                                <View style={styles.ratingOnImage}>
+                                                    <Star size={14} color="#fbbf24" fill="#fbbf24" />
+                                                    <Text style={styles.ratingText}>{rec.rating?.split('/')[0] || 'N/A'}</Text>
+                                                </View>
                                             </View>
-                                        )}
-                                        <LinearGradient
-                                            colors={['transparent', 'rgba(0,0,0,0.9)']}
-                                            style={styles.imageOverlay}
-                                        />
-                                        <View style={styles.ratingOnImage}>
-                                            <Star size={14} color="#fbbf24" fill="#fbbf24" />
-                                            <Text style={styles.ratingText}>{rec.rating?.split('/')[0] || 'N/A'}</Text>
-                                        </View>
-                                    </View>
 
-                                    <View style={styles.sliderCardContent}>
-                                        <Text style={styles.sliderTitle} numberOfLines={2}>{rec.title}</Text>
-                                        <Text style={styles.sliderMeta}>{rec.year} • {rec.creator}</Text>
+                                            <View style={styles.sliderCardContent}>
+                                                <Text style={styles.sliderTitle} numberOfLines={2}>{rec.title}</Text>
+                                                <Text style={styles.sliderMeta}>{rec.year} • {rec.creator}</Text>
+                                            </View>
+                                        </TouchableOpacity>
 
-                                        <View style={styles.reasonBox}>
-                                            <Text style={styles.reasonLabel}>Neden?</Text>
-                                            <Text style={styles.sliderReason}>
-                                                {rec.reason}
-                                            </Text>
-                                        </View>
-
-                                        {/* Actions Section */}
+                                        {/* Actions Section - Outside touchable so buttons work independently */}
                                         <View style={styles.sliderActions}>
                                             {selectedCategory === 'Music' ? (
                                                 <View style={styles.musicButtonsRow}>
@@ -327,7 +394,50 @@ export default function ResultsScreen() {
                                                 )
                                             )}
                                         </View>
-                                    </View>
+                                    </Animated.View>
+
+                                    {/* Back of Card */}
+                                    <Animated.View
+                                        style={[
+                                            styles.cardFace,
+                                            styles.cardBack,
+                                            {
+                                                opacity: backOpacity,
+                                                transform: [{ rotateY: backRotateY }],
+                                            },
+                                        ]}
+                                    >
+                                        <TouchableOpacity
+                                            activeOpacity={0.9}
+                                            onPress={() => handleFlip(index)}
+                                            style={styles.backTouchable}
+                                        >
+                                            {/* Decorative Background */}
+                                            <LinearGradient
+                                                colors={[`${dominantColor}20`, 'transparent']}
+                                                style={styles.backGradient}
+                                            />
+
+                                            {/* Header */}
+                                            <Text style={[styles.backReasonLabel, { color: dominantColor }]}>
+                                                Neden Bu Öneri?
+                                            </Text>
+
+                                            {/* Content Title */}
+                                            <Text style={styles.backTitle} numberOfLines={2}>{rec.title}</Text>
+                                            <Text style={styles.backMeta}>{rec.year} • {rec.creator}</Text>
+
+                                            {/* Reason Text with Typewriter Animation */}
+                                            <View style={styles.backReasonContainer}>
+                                                <TypewriterText
+                                                    text={rec.reason}
+                                                    style={styles.backReasonText}
+                                                    speed={5}
+                                                    isActive={flippedCards[index] || false}
+                                                />
+                                            </View>
+                                        </TouchableOpacity>
+                                    </Animated.View>
                                 </Animated.View>
                             );
                         })}
@@ -508,14 +618,74 @@ const styles = StyleSheet.create({
     },
     sliderCard: {
         width: CARD_WIDTH,
-        backgroundColor: '#151515',
+        backgroundColor: 'transparent',
         borderRadius: 24,
         marginRight: SPACING,
+        position: 'relative',
+    },
+    cardFace: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        backfaceVisibility: 'hidden',
+        borderRadius: 24,
         overflow: 'hidden',
+    },
+    cardFront: {
+        backgroundColor: '#151515',
         borderWidth: 1,
         borderColor: '#222',
-        // Increased height to prevent overflow with vertical poster and text
-        height: 650,
+    },
+    cardBack: {
+        backgroundColor: '#1a1a1a',
+        borderWidth: 1,
+        borderColor: '#333',
+    },
+    cardTouchable: {
+        flex: 1,
+    },
+    flipHint: {
+        position: 'absolute',
+        bottom: 16,
+        left: 16,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
+        borderRadius: 20,
+    },
+    flipHintText: {
+        color: '#000',
+        fontSize: 12,
+        fontWeight: '700',
+    },
+    backTouchable: {
+        flex: 1,
+        padding: 24,
+    },
+    backGradient: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 150,
+        borderRadius: 24,
+    },
+    backIconCircle: {
+        width: 48,
+        height: 48,
+        borderRadius: 24,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 12,
+    },
+    backIconEmoji: {
+        fontSize: 24,
+    },
+    backReasonContainer: {
+        flex: 1,
+        marginTop: 20,
+        backgroundColor: 'rgba(255,255,255,0.05)',
+        padding: 16,
+        borderRadius: 16,
     },
     cardImageContainer: {
         // Vertical Poster Aspect Ratio
@@ -603,8 +773,73 @@ const styles = StyleSheet.create({
         color: '#ccc',
         lineHeight: 18,
     },
+    readMoreBtn: {
+        marginTop: 6,
+        alignSelf: 'flex-start',
+    },
+    readMoreText: {
+        fontSize: 12,
+        fontWeight: '700',
+        letterSpacing: 0.3,
+    },
+    backScrollView: {
+        flex: 1,
+    },
+    backContent: {
+        flexGrow: 1,
+        justifyContent: 'space-between',
+        paddingBottom: 20,
+    },
+    backHeader: {
+        marginBottom: 16,
+        alignItems: 'center',
+    },
+    backTitle: {
+        fontSize: 24,
+        fontWeight: '800',
+        color: '#fff',
+        marginBottom: 8,
+        lineHeight: 30,
+    },
+    backMeta: {
+        fontSize: 14,
+        color: '#888',
+        fontWeight: '500',
+    },
+    backReasonSection: {
+        flex: 1,
+    },
+    backReasonLabel: {
+        fontSize: 12,
+        color: '#666',
+        fontWeight: '700',
+        textTransform: 'uppercase',
+        marginBottom: 12,
+        letterSpacing: 1,
+    },
+    backReasonText: {
+        fontSize: 15,
+        color: '#d4d4d4',
+        lineHeight: 24,
+    },
+    flipBackBtn: {
+        marginTop: 24,
+        paddingVertical: 14,
+        paddingHorizontal: 24,
+        borderRadius: 12,
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        borderWidth: 2,
+    },
+    flipBackBtnText: {
+        fontSize: 14,
+        fontWeight: '800',
+        letterSpacing: 0.5,
+    },
     sliderActions: {
         marginTop: 'auto',
+        paddingHorizontal: 20,
+        paddingBottom: 20,
     },
     musicButtonsRow: {
         flexDirection: 'row',
