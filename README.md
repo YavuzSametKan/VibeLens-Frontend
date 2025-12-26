@@ -1,69 +1,76 @@
 # VibeLens Mobile Client
-Yapay zeka destekli yüz analizi ile anlık duygu durumunuzu tespit eden ve size en uygun Film, Dizi, Müzik veya Kitap önerileri sunan React Native uygulaması.
+
+Yapay zeka destekli yüz analizi ile anlık duygu durumunu tespit eden ve kullanıcıya uygun Film, Dizi, Müzik veya Kitap önerileri sunan React Native uygulaması.
 
 [![Expo](https://img.shields.io/badge/Expo-SDK_50+-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
 [![React Native](https://img.shields.io/badge/React_Native-0.73-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactnative.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![NativeWind](https://img.shields.io/badge/Tailwind_CSS-NativeWind-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://www.nativewind.dev/)
 
-<img src="./docs/screenshots/general.jpeg" alt="General" />
+![General App Preview](./docs/screenshots/general.jpeg)
 
 ---
 
 ## Proje Hakkında
 
-**VibeLens**, kullanıcıların selfie çekerek o anki duygusal durumlarını (Mutluluk, Üzgünlük, Öfke, Küçümseme vb.) analiz etmelerini sağlar. Arka planda çalışan güçlü bir Python API (DeepFace & Gemini AI) ile iletişim kurarak, tespit edilen duyguya özel kürate edilmiş içerik önerileri sunar.
+VibeLens, kullanıcıların selfie çekerek o anki duygusal durumlarını analiz etmelerini sağlayan bir mobil istemcidir. Uygulama, arka planda çalışan Python tabanlı bir API ile iletişim kurarak yüz ifadelerinden baskın ve ikincil duyguları tespit eder. Analiz sonucuna göre kürate edilmiş içerik önerileri sunar.
 
-Uygulama, **Cyberpunk/Dark Mode** estetiği ile tasarlanmış olup, akıcı animasyonlar ve modern bir kullanıcı deneyimi sunar.
+Arayüz tasarımı karanlık mod (dark mode) esas alınarak geliştirilmiş olup, NativeWind kullanılarak şekillendirilmiştir.
 
 ---
 
 ## Özellikler
 
-* **AI Destekli Duygu Analizi:** Yüz ifadelerinden baskın ve ikincil duyguları (örn: *Eleştirel Mesafe ve Serinkanlı Küçümseme*) tespit eder.
-* **Gelişmiş Kamera Arayüzü:** Yüz çerçeveleme kılavuzları ile entegre kamera deneyimi.
-* **Dinamik Öneriler:**
-    * Filmler
-    * Diziler
-    * Müzik
-    * Kitaplar
-* **Modern UI/UX:** NativeWind ile oluşturulmuş, Neon vurgulu şık karanlık mod tasarımı.
-* **⚡ Performans:** Expo Router ile hızlı sayfa geçişleri ve Zustand ile optimize edilmiş durum yönetimi.
+* **Duygu Analizi:** Yüz ifadelerinden baskın (örn: Mutluluk) ve ikincil (örn: Heyecan) duyguların tespiti.
+* **Kamera Arayüzü:** Yüz hizalama kılavuzları içeren özelleştirilmiş kamera modülü.
+* **İçerik Önerileri:** Tespit edilen ruh haline uygun film, dizi, müzik ve kitap tavsiyeleri.
+* **Kullanıcı Arayüzü:** Neon vurgulara sahip modern ve minimalist tasarım.
+* **Performans:** Expo Router ile dosya tabanlı yönlendirme ve Zustand ile durum yönetimi.
+
+---
+
+## Ekran Görüntüleri
+
+| Ana Ekran | Kamera | Önizleme |
+|:---:|:---:|:---:|
+| <img src="./docs/screenshots/home.PNG" width="250" /> | <img src="./docs/screenshots/camera_overlay.PNG" width="250" /> | <img src="./docs/screenshots/preview.PNG" width="250" /> |
+
+| Analiz Süreci | Sonuçlar (Detay) | Sonuçlar (Öneri) |
+|:---:|:---:|:---:|
+| <img src="./docs/screenshots/loading.PNG" width="250" /> | <img src="./docs/screenshots/results_analysis.PNG" width="250" /> | <img src="./docs/screenshots/results_recommendation.PNG" width="250" /> |
 
 ---
 
 ## Teknoloji Yığını
 
-* **Framework:** React Native (via Expo)
+* **Framework:** React Native (Expo SDK 50+)
 * **Dil:** TypeScript
-* **Styling:** NativeWind (Tailwind CSS)
-* **Navigasyon:** Expo Router (File-based routing)
-* **State Management:** Zustand
-* **Networking:** Axios
-* **Icons:** Lucide React Native
-* **Fonts:** Custom Google Fonts (Inter / Poppins)
+* **Stil:** NativeWind (Tailwind CSS)
+* **Navigasyon:** Expo Router
+* **Durum Yönetimi:** Zustand
+* **Ağ İstekleri:** Axios
 
 ---
 
-## Kurulum ve Çalıştırma
+## Kurulum
 
-Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin.
+Projeyi yerel ortamda çalıştırmak için aşağıdaki adımları takip edin.
 
-### Ön Hazırlık
+### Gereksinimler
 
-* Node.js (v18+)
-* Expo Go (Mobil cihazınızda) veya iOS Simulator / Android Emulator
+* Node.js (LTS sürümü önerilir)
+* Expo Go uygulaması (Fiziksel cihaz testi için) veya iOS Simulator / Android Emulator
 
-### Adım 1: Repoyu Klonlayın
+### Adımlar
 
-```bash
-git clone [https://github.com/kullaniciadi/vibelens-mobile.git](https://github.com/kullaniciadi/vibelens-mobile.git)
-cd vibelens-mobile
+1. Repoyu klonlayın:
+   ```bash
+   git clone [https://github.com/kullaniciadi/vibelens-mobile.git](https://github.com/kullaniciadi/vibelens-mobile.git)
+   cd vibelens-mobile
 
 ```
 
-### Adım 2: Bağımlılıkları Yükleyin
-
+2. Bağımlılıkları yükleyin:
 ```bash
 npm install
 # veya
@@ -71,63 +78,54 @@ yarn install
 
 ```
 
-### Adım 3: Çevresel Değişkenleri Ayarlayın
 
-Kök dizinde `.env` dosyası oluşturun ve backend API adresinizi girin:
-
+3. Çevresel değişkenleri yapılandırın:
+Kök dizinde `.env` dosyası oluşturun ve API adresini tanımlayın.
 ```env
-EXPO_PUBLIC_API_URL=http://YOUR_LOCAL_IP:8000
+EXPO_PUBLIC_API_URL=http://LOCALHOST_IP:8000
 EXPO_PUBLIC_USE_MOCK_DATA=false
 
 ```
 
-### Adım 4: Uygulamayı Başlatın
 
+4. Uygulamayı başlatın:
 ```bash
 npx expo start
 
 ```
 
-QR kodu telefonunuzdaki **Expo Go** uygulaması ile taratın veya `i` tuşuna basarak iOS Simulator'da başlatın.
 
 ---
 
 ## Proje Yapısı
 
-```
-VibeLensMobile/
-├── app/                 # Expo Router sayfaları (Screens)
-│   ├── (tabs)/          # Tab navigasyonu (varsa)
-│   ├── camera/          # Kamera ve Tarama ekranları
-│   ├── results/         # Sonuç ekranları
-│   └── index.tsx        # Ana giriş
-├── src/
-│   ├── components/      # Yeniden kullanılabilir UI bileşenleri
-│   │   ├── Button.tsx
-│   │   ├── MoodCard.tsx
-│   │   └── ...
-│   ├── services/        # API servisleri (api.ts)
-│   ├── stores/          # Zustand store'ları (useMoodStore.ts)
-│   ├── types/           # TypeScript tipleri
-│   └── utils/           # Yardımcı fonksiyonlar
-├── assets/              # Fontlar ve Resimler
-├── docs/                # Dokümantasyon görselleri
-└── ...
+Proje, Expo Router yapısına uygun olarak düzenlenmiş olup, kaynak kodları `src` dizini altında modüler hale getirilmiştir.
+
+```text
+VibeLens-Frontend/
+├── app/                      # Expo Router sayfa ve yönlendirme tanımları
+│   ├── (tabs)/               # Alt navigasyon sekmeleri (varsa)
+│   ├── _layout.tsx           # Ana düzen ve provider tanımları
+│   ├── analyzing.tsx         # Analiz animasyon ekranı
+│   ├── camera.tsx            # Fotoğraf çekim ekranı
+│   ├── index.tsx             # Karşılama ve kategori seçim ekranı
+│   ├── modal.tsx             # Modal pencereler
+│   └── results.tsx           # Analiz sonuçları ve öneri ekranı
+├── src/                      # Uygulama mantığı ve yardımcı dosyalar
+│   ├── components/           # Yeniden kullanılabilir UI bileşenleri
+│   ├── constants/            # Tema, renkler ve sabit veriler
+│   ├── screens/              # Sayfa özelindeki mantıksal bileşenler
+│   ├── services/             # API çağrıları ve dış servis entegrasyonları
+│   ├── store/                # Zustand durum yönetimi (State management)
+│   └── types/                # TypeScript tip tanımları
+├── components/               # Proje genelinde kullanılan temel UI elementleri
+├── assets/                   # Görseller ve font dosyaları
+└── docs/                     # Dokümantasyon materyalleri
 
 ```
-
----
-
-## Katkıda Bulunma
-
-1. Bu repoyu Forklayın.
-2. Yeni bir feature branch oluşturun (`git checkout -b feature/AmazingFeature`).
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some AmazingFeature'`).
-4. Branch'inizi Pushlayın (`git push origin feature/AmazingFeature`).
-5. Bir Pull Request oluşturun.
 
 ---
 
 ## Lisans
 
-Bu proje [MIT](https://www.google.com/search?q=LICENSE) lisansı altında lisanslanmıştır.
+Bu proje MIT lisansı altında dağıtılmaktadır.
